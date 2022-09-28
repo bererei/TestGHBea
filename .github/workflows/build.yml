@@ -10,12 +10,10 @@ jobs: # Solo vamos a crear uno
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3  # descargar el repositorio con el código que se indica aquí https://github.com/actions/checkout. Puede configuarse modificando las variables.
-      - uses: actions/setup-python@4    # Acción que instala python: github.com/-actions/setup-python
+      - uses: actions/setup-python@v4    # Acción que instala python: github.com/-actions/setup-python
         with:
           python-version: "3.10"
       - name: Install Poetry Action  # https://github.com/marketplace/actions/install-poetry-action
         uses: snok/install-poetry@v1.3.1
       - run: poetry build  # run ejecuta comando de consola en el repo
       - run: ls ${{ github.workspace }}
-
-
