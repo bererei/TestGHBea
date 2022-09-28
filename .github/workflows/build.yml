@@ -12,4 +12,7 @@ jobs: # Solo vamos a crear uno
       - uses: actions/setup-python@4    # Acción que instala python: github.com/-actions/setup-python
         with:
           python-version: "3.10"
+      - name: Install Poetry Action
+        uses: snok/install-poetry@v1.3.1
+
 
