@@ -8,7 +8,7 @@ on: [push]  # Cuando se ejecuta ( ${{ github.event_name }} )
 jobs: # Solo vamos a crear un job.
   building:
     runs-on: ubuntu-latest  # Job will run on: ${{ runner.os }}
-    steps:
+    steps:  # A diferencia de los workflows no se pueden ejecutar en paralelo, sino secuencial
       - uses: actions/checkout@v3  # Checks out repository (TestGHBea) code. Descargar el repositorio, el código que hay detrás para hacer esto está en https://github.com/actions/checkout. Puede configuarse modificando las variables. Branch: ${{ github.ref }} y el Repository: ${{ github.repository }}
       - uses: actions/setup-python@v4    # Acción que instala python: github.com/-actions/setup-python
         with:
@@ -16,4 +16,10 @@ jobs: # Solo vamos a crear un job.
       - name: Install Poetry Action  # https://github.com/marketplace/actions/install-poetry-action
         uses: snok/install-poetry@v1.3.1
       - run: poetry build  # run ejecuta comando de consola en el repo. Comando para empaquetar con poetry.
-      - run: ls ${{ github.workspace }}  # Comando 
+      - name: Publish to GH Releases  # https://github.com/marketplace?type=: publish release. BEST: https://github.com/softprops/action-gh-release
+        uses: softprops/action-gh-release@v1
+        with:  # carpeta de trabajo/carpeta dist/* (todos los fichero en la carpeta)
+          files: ${{ github.workspace }}/dist/*
+
+      
+      
