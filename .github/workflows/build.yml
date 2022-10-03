@@ -16,10 +16,12 @@ jobs: # Solo vamos a crear un job.
       - name: Install Poetry Action  # https://github.com/marketplace/actions/install-poetry-action
         uses: snok/install-poetry@v1.3.1
       - run: poetry build  # run ejecuta comando de consola en el repo. Comando para empaquetar con poetry.
-      - name: Publish to GH Releases  # https://github.com/marketplace?type=: publish release. BEST: https://github.com/softprops/action-gh-release
+      - name: Publish to GH Releases  # https://github.com/marketplace?type=: publish release. BEST: https://github.com/softprops/action-gh-release. VER: https://github.com/softprops/action-gh-release#-customizing
         uses: softprops/action-gh-release@v1
         with:  # carpeta de trabajo/carpeta dist/* (todos los fichero en la carpeta)
           files: ${{ github.workspace }}/dist/*
+          name: Nombre
+          tag_name: etiqueta
 
       
       
