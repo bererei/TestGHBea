@@ -20,8 +20,6 @@ jobs: # Solo vamos a crear un job.
         uses: softprops/action-gh-release@v1
         with:  # carpeta de trabajo/carpeta dist/* (todos los fichero en la carpeta)
           files: ${{ github.workspace }}/dist/*
-          name: Nombre
-          tag_name: etiqueta
 
       
       
