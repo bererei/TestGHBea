@@ -6,7 +6,7 @@
 name: Building  # Nombre del workflow
 on:  # Cuando se ejecuta ( ${{ github.event_name }} )
   push:
-    tags:  # Solo se ejecuta en push cuando tiene este formato de etiqueta. Si no etiquetamos el commit no se ejecuta.
+    tags:  # Building.yml solo se ejecutará en push cuando tiene este formato de etiqueta. Si no etiquetamos el commit no se ejecuta.
       - "v*.*.*"
 jobs: # Solo vamos a crear un job.
   building:
@@ -18,6 +18,11 @@ jobs: # Solo vamos a crear un job.
           python-version: "3.10"
       - name: Install Poetry Action  # https://github.com/marketplace/actions/install-poetry-action
         uses: snok/install-poetry@v1.3.1
+      - name: Install dependences
+        run: poetry install
+      - name: Testing
+        run: poetry run pytest
+      
       - run: poetry build  # run ejecuta comando de consola en el repo. Comando para empaquetar con poetry.
       - name: Publish to GH Releases  # https://github.com/marketplace?type=: publish release. BEST: https://github.com/softprops/action-gh-release. VER: https://github.com/softprops/action-gh-release#-customizing
         uses: softprops/action-gh-release@v1
