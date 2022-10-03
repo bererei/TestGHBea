@@ -4,7 +4,10 @@
 # https://docs.github.com/en/actions
 
 name: Building  # Nombre del workflow
-on: [push]  # Cuando se ejecuta ( ${{ github.event_name }} )
+on:  # Cuando se ejecuta ( ${{ github.event_name }} )
+  push:
+    tags:  # Solo se ejecuta en push cuando tiene este formato de etiqueta. Si no etiquetamos el commit no se ejecuta.
+      - "v*.*.*"
 jobs: # Solo vamos a crear un job.
   building:
     runs-on: ubuntu-latest  # Job will run on: ${{ runner.os }}
