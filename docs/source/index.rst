@@ -11,8 +11,11 @@ Welcome to Modeltools documentation's documentation!
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+   
+   install 
+   example
 
-Para crear la documentación mira este link: https://sphinx-tutorial.readthedocs.io/step-1/
+
 
 
 Indices and tables
@@ -21,3 +24,5 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+Para crear la documentación mira este link: https://sphinx-tutorial.readthedocs.io/step-1/
