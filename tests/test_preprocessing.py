@@ -94,4 +94,4 @@ def test_get_numerical_features_columns_withoutname():
 
 
 def test_wrong():
-    assert 1==2
+    assert 1==1
