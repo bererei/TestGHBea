@@ -8,11 +8,14 @@
 Welcome to Modeltools documentation's documentation!
 ====================================================
 
+Emitiendo para toda la galaxia
+
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
    
-   install 
+   install
    example
 
 
@@ -25,4 +28,3 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 
-Para crear la documentación mira este link: https://sphinx-tutorial.readthedocs.io/step-1/
