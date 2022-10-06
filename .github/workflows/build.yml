@@ -4,10 +4,10 @@
 # https://docs.github.com/en/actions
 
 name: Building  # Nombre del workflow
-on:  # Cuando se ejecuta ( ${{ github.event_name }} )
-  push:
-    tags:  # Building.yml solo se ejecutará en push cuando tiene este formato de etiqueta. Si no etiquetamos el commit no se ejecuta.
-      - "v*.*.*"
+on: [push]  # Cuando se ejecuta ( ${{ github.event_name }} )
+  # push:
+    # tags:  # Building.yml solo se ejecutará en push cuando tiene este formato de etiqueta. Si no etiquetamos el commit no se ejecuta.
+      # - "v*.*.*"
 jobs: # Solo vamos a crear un job.
   building:
     runs-on: ubuntu-latest  # Job will run on: ${{ runner.os }}
@@ -21,9 +21,12 @@ jobs: # Solo vamos a crear un job.
       - name: Install dependencies
         run: poetry install
       - name: Testing
-        run: poetry run pytest
+        run: poetry run pytest --junitxml=jest-junit.xml  # para que devuelva el un ficher con el formato adecuado para que el step de GitHub Actions pueda leerlo.
+      - name: Test Report
+        uses: dorny/test-reporter@v1
       - run: poetry build  # run ejecuta comando de consola en el repo. Comando para empaquetar con poetry.
       - name: Publish to GH Releases  # https://github.com/marketplace?type=: publish release. BEST: https://github.com/softprops/action-gh-release. VER: https://github.com/softprops/action-gh-release#-customizing
+        if: startsWith(github.ref, 'refs/tags/v')  # para que solo se ejecute si etiquetamos el commit empezando por v
         uses: softprops/action-gh-release@v1
         with:  # carpeta de trabajo/carpeta dist/* (todos los fichero en la carpeta)
           files: ${{ github.workspace }}/dist/*

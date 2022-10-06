@@ -90,3 +90,8 @@ def test_get_numerical_features_columns_withoutname():
     ])
 
     assert get_numerical_features(df) == [0]
+
+
+
+def test_wrong():
+    assert 1==2
