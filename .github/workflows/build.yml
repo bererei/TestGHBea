@@ -1,4 +1,4 @@
-# https://gist.github.com/double-thinker/b0bcae971f092ae0904bb82a7db6adeb
+# https://gist.github.com/double-thinker/39388101c93306245a4a28a8c66618d1
 
 # Actions crea contenedores para ejecutar las acciones.
 # Cuando se salta actions SIEMPRE se ejecuta lo mismo para todos (versiones...)
@@ -28,14 +28,14 @@ jobs: # Solo vamos a crear un job.
         uses: dorny/test-reporter@v1
         if: success() || failure()    # run this step even if previous step failed
         with:
-          name: Tests            # Name of the check run which will be created
+          name: Test            # Name of the check run which will be created
           path: jest-junit.xml    # Path to test results
           reporter: java-junit        # Format of test results. Java unit tiene que coincidir con "poetry run pytest"
-      - name: Code Coverage Summary Report  # % de mi código cubierto por tests. Medida complementaria a tests superados.
+        - name: Coverage Report  # % de mi código cubierto por tests. Medida complementaria a tests superados.
         uses: devmasx/coverage-check-action@v1.2.0
         with:
           type: lcov
-          result_path: coverage/example.lcov
+          result_path: coverage.lcov
           min_coverage: 90
           token: ${{ github.token }}
       - run: poetry build  # run ejecuta comando de consola en el repo. Comando para empaquetar con poetry.
