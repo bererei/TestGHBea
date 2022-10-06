@@ -12,7 +12,7 @@ def test_get_numerical_features_simple():
     """En este test vamos a probar que logra distinguir entre cadenas de textos y números enteros"""
 
     df = pd.DataFrame({
-    "numerica": [21],
+    "numerica": [7],
     "categorica": ["rojo"]
     })
 
