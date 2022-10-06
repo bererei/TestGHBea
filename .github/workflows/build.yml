@@ -23,7 +23,7 @@ jobs: # Solo vamos a crear un job.
       - name: Install dependencies
         run: poetry install
       - name: Testing
-        run: poetry run pytest --junitxml=jest-junit.xml --cov=modeltools --cov-report=lcov --cov-report=xml  # para que devuelva el un ficher con el formato adecuado para que el step de GitHub Actions pueda leerlo.
+        run: poetry run pytest --junitxml=jest-junit.xml --cov=modeltools --cov-report=lcov --cov-report=xml  # para que devuelva el un ficheros con el formato adecuado para que el step de GitHub Actions pueda leerlo (ej. .lcov, .xml, ...).
       - name: Test Report  # Generar informe de pytest y verlo en GH
         uses: dorny/test-reporter@v1
         if: success() || failure()    # run this step even if previous step failed
@@ -31,6 +31,13 @@ jobs: # Solo vamos a crear un job.
           name: Tests            # Name of the check run which will be created
           path: jest-junit.xml    # Path to test results
           reporter: java-junit        # Format of test results. Java unit tiene que coincidir con "poetry run pytest"
+      - name: Code Coverage Summary Report  # % de mi código cubierto por tests. Medida complementaria a tests superados.
+        uses: devmasx/coverage-check-action@v1.2.0
+        with:
+          type: lcov
+          result_path: coverage/example.lcov
+          min_coverage: 90
+          token: ${{ github.token }}
       - run: poetry build  # run ejecuta comando de consola en el repo. Comando para empaquetar con poetry.
       - name: Publish to GH Releases  # https://github.com/marketplace?type=: publish release. BEST: https://github.com/softprops/action-gh-release. VER: https://github.com/softprops/action-gh-release#-customizing
         if: startsWith(github.ref, 'refs/tags/v')  # para que solo se ejecute si etiquetamos el commit empezando por v
