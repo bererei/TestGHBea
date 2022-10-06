@@ -28,7 +28,7 @@ jobs: # Solo vamos a crear un job.
         with:
           name: Tests            # Name of the check run which will be created
           path: jest-junit.xml    # Path to test results
-          reporter: java-unit        # Format of test results. Java unit tiene que coincidir con "poetry run pytest"
+          reporter: jest-unit        # Format of test results. Java unit tiene que coincidir con "poetry run pytest"
       - run: poetry build  # run ejecuta comando de consola en el repo. Comando para empaquetar con poetry.
       - name: Publish to GH Releases  # https://github.com/marketplace?type=: publish release. BEST: https://github.com/softprops/action-gh-release. VER: https://github.com/softprops/action-gh-release#-customizing
         if: startsWith(github.ref, 'refs/tags/v')  # para que solo se ejecute si etiquetamos el commit empezando por v
