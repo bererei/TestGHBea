@@ -37,7 +37,7 @@ jobs: # Solo vamos a crear un job.
         with:
           type: lcov
           result_path: coverage.lcov
-          min_coverage: 90
+          min_coverage: 80
           token: ${{ github.token }}
       - name: build 
         run: poetry build  # run ejecuta comando de consola en el repo. Comando para empaquetar con poetry.
