@@ -44,4 +44,10 @@ def get_numerical_features2(df):
 
 
 def half(x):
-    return x/2
+    """
+    >>> from modeltools.preprocessing import half  
+    >>> half(4)
+    2
+    """
+
+    return int(x/2)
