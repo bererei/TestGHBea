@@ -32,6 +32,7 @@ jobs: # Solo vamos a crear un job.
           path: jest-junit.xml  # Path to test results
           reporter: java-junit  # Format of test results. Tiene que coincidir con "poetry run pytest"
       - name: Coverage Report
+        if: always()
         uses: devmasx/coverage-check-action@v1.2.0  # % de mi código cubierto por tests. Medida complementaria a tests superados.
         with:
           type: lcov
