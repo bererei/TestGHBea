@@ -37,7 +37,7 @@ jobs: # Solo vamos a crear un job.
         with:
           name: Coverage check
           type: lcov
-          result_path: coverage.lcov
+          result_path: coverage/coverage_Bea.lcov
           min_coverage: 80
           token: ${{ github.token }}
       - name: build 
