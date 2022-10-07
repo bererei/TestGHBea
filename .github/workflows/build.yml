@@ -25,16 +25,17 @@ jobs: # Solo vamos a crear un job.
       - name: Testing
         run: poetry run pytest --junitxml=jest-junit.xml --cov=modeltools --cov-report=lcov --cov-report=xml --cov-report=html  # para que devuelva el un ficheros con el formato adecuado para que el step de GitHub Actions pueda leerlo (ej. .lcov, .xml, ...).
       - name: Test Report  # Generar informe de pytest y verlo en GH
+        if: always()  # run this step even if previous step failed (alternativa: success() || failure())
         uses: dorny/test-reporter@v1
-        if: success() || failure()  # run this step even if previous step failed
         with:
-          name: Tests  # Name of the check run which will be created
+          name: Test report  # Name of the check run which will be created
           path: jest-junit.xml  # Path to test results
           reporter: java-junit  # Format of test results. Tiene que coincidir con "poetry run pytest"
       - name: Coverage Report
         if: always()
         uses: devmasx/coverage-check-action@v1.2.0  # % de mi código cubierto por tests. Medida complementaria a tests superados.
         with:
+          name: Coverage report
           type: lcov
           result_path: coverage.lcov
           min_coverage: 80
