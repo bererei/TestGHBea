@@ -8,15 +8,12 @@
 Welcome to Modeltools documentation's documentation!
 ====================================================
 
-Emitiendo para toda la galaxia
-
-
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+   install
    example
-   install2
 
 
 
