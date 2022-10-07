@@ -1,5 +1,3 @@
-# https://gist.github.com/double-thinker/39388101c93306245a4a28a8c66618d1
-
 # Actions crea contenedores para ejecutar las acciones.
 # Cuando se salta actions SIEMPRE se ejecuta lo mismo para todos (versiones...)
 # Microsoft es dueño de GitHub. Cuando hacemos un push en sus data centers se ejecuta.
@@ -28,7 +26,7 @@ jobs: # Solo vamos a crear un job.
         if: always()  # run this step even if previous step failed (alternativa: success() || failure())
         uses: dorny/test-reporter@v1
         with:
-          name: Test report Bea  # Name of the check run which will be created
+          name: Test report  # Name of the check run which will be created
           path: jest-junit.xml  # Path to test results
           reporter: java-junit  # Format of test results. Tiene que coincidir con "poetry run pytest"
       - name: Coverage Check
