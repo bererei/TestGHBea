@@ -14,8 +14,8 @@ Emitiendo para toda la galaxia
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-   
-   install
+
+   install2
    example
 
 
