@@ -35,9 +35,8 @@ jobs: # Solo vamos a crear un job.
         if: always()
         uses: devmasx/coverage-check-action@v1.2.0  # % de mi código cubierto por tests. Medida complementaria a tests superados.
         with:
-          name: Coverage check
           type: lcov
-          result_path: coverage/coverage_Bea.lcov
+          result_path: coverage_Bea.lcov
           min_coverage: 80
           token: ${{ github.token }}
       - name: build 
