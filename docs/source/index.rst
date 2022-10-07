@@ -15,8 +15,8 @@ Emitiendo para toda la galaxia
    :maxdepth: 2
    :caption: Contents:
 
-   install2
    example
+   install2
 
 
 
