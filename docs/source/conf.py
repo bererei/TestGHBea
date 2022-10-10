@@ -6,10 +6,11 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+
 project = 'Modeltools documentation'
 copyright = '2022, Beatriz'
 author = 'Beatriz'
-release = '1'
+release = "1"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -24,7 +25,7 @@ exclude_patterns = []
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'furo'
+html_theme = 'alabaster'  # 'furo'
 html_static_path = ['_static']
 
 extensions = [
@@ -34,3 +35,4 @@ extensions = [
 
 autoapi_type = 'python'
 autoapi_dirs = ['../../modeltools']  # subo dos directorios para que encuentre el paquete.
+

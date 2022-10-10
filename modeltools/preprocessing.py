@@ -8,7 +8,7 @@ import numpy as np  # Ahora quedará declarada en .toml
 def get_numerical_features(df):
     """
     Función que devuelve todas las variables cuantitativas de un dataframe.
-    
+
     Parámetros
     ------------
 
@@ -23,31 +23,35 @@ def get_numerical_features(df):
     >>> get_numerical_features(df)
     ['a']
     """
-    return list(df.select_dtypes(include=[np.number]).columns)  # Lo casteo a lista para que aunque esté vacío me de una lista.
+    return list(
+        df.select_dtypes(include=[np.number]).columns
+    )  # Lo casteo a lista para que aunque esté vacío me de una lista.
 
 
 def get_numerical_features2(df):
     """
     Función que devuelve todas las variables cuantitativas de un dataframe.
-    
+
     :param df: dataframe
     :type df: pandas.DataFrame
     :return: lista de nombres de columnas
-    
+
     >>> from modeltools.preprocessing import get_numerical_features
     >>> import pandas as pd
     >>> df = pd.DataFrame({'a':[1]})
     >>> get_numerical_features(df)
     ['a']
     """
-    return list(df.select_dtypes(include=[np.number]).columns)  # Lo casteo a lista para que aunque esté vacío me de una lista.
+    return list(
+        df.select_dtypes(include=[np.number]).columns
+    )  # Lo casteo a lista para que aunque esté vacío me de una lista.
 
 
 def half(x):
     """
-    >>> from modeltools.preprocessing import half  
+    >>> from modeltools.preprocessing import half
     >>> half(4)
     2
     """
 
-    return int(x/2)
+    return int(x / 2)

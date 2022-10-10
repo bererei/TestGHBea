@@ -12,7 +12,7 @@ Welcome to Modeltools documentation's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   install
+   instalation
    example
 
 
