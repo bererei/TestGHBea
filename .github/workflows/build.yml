@@ -3,44 +3,45 @@
 # Microsoft es dueño de GitHub. Cuando hacemos un push en sus data centers se ejecuta.
 # https://docs.github.com/en/actions
 
-name: Building  # Nombre del workflow
-on: [push]  # Cuando se ejecuta ( ${{ github.event_name }} )
+name: Building # Nombre del workflow
+on:
+  [push] # Cuando se ejecuta ( ${{ github.event_name }} )
   # push:
-    # tags:  # Building.yml solo se ejecutará en push cuando tiene este formato de etiqueta. Si no etiquetamos el commit no se ejecuta.
-      # - "v*.*.*"
+  # tags:  # Building.yml solo se ejecutará en push cuando tiene este formato de etiqueta. Si no etiquetamos el commit no se ejecuta.
+  # - "v*.*.*"
 jobs: # Solo vamos a crear un job.
   building:
-    runs-on: ubuntu-latest  # Job will run on: ${{ runner.os }}
-    steps:  # A diferencia de los workflows no se pueden ejecutar en paralelo, sino secuencial
-      - uses: actions/checkout@v3  # Checks out repository (TestGHBea) code. Descargar el repositorio, el código que hay detrás para hacer esto está en https://github.com/actions/checkout. Puede configuarse modificando las variables. Branch: ${{ github.ref }} y el Repository: ${{ github.repository }}
-      - uses: actions/setup-python@v4    # Acción que instala python: github.com/-actions/setup-python
+    runs-on: ubuntu-latest # Job will run on: ${{ runner.os }}
+    steps: # A diferencia de los workflows no se pueden ejecutar en paralelo, sino secuencial
+      - uses: actions/checkout@v3 # Checks out repository (TestGHBea) code. Descargar el repositorio, el código que hay detrás para hacer esto está en https://github.com/actions/checkout. Puede configuarse modificando las variables. Branch: ${{ github.ref }} y el Repository: ${{ github.repository }}
+      - uses: actions/setup-python@v4 # Acción que instala python: github.com/-actions/setup-python
         with:
-          python-version: "3.10"
-      - name: Install Poetry Action  # https://github.com/marketplace/actions/install-poetry-action
+          python-version: "3.9.11"
+      - name: Install Poetry Action # https://github.com/marketplace/actions/install-poetry-action
         uses: snok/install-poetry@v1.3.1
       - name: Install dependencies
         run: poetry install
       - name: Testing
-        run: poetry run pytest --junitxml=jest-junit.xml --cov=modeltools --cov-report=lcov --cov-report=xml --cov-report=html  # para que devuelva el un ficheros con el formato adecuado para que el step de GitHub Actions pueda leerlo (ej. .lcov, .xml, ...).
-      - name: Test Report  # Generar informe de pytest y verlo en GH
-        if: always()  # run this step even if previous step failed (alternativa: success() || failure())
+        run: poetry run pytest --junitxml=jest-junit.xml --cov=modeltools --cov-report=lcov --cov-report=xml --cov-report=html # para que devuelva el un ficheros con el formato adecuado para que el step de GitHub Actions pueda leerlo (ej. .lcov, .xml, ...).
+      - name: Test Report # Generar informe de pytest y verlo en GH
+        if: always() # run this step even if previous step failed (alternativa: success() || failure())
         uses: dorny/test-reporter@v1
         with:
-          name: Test report  # Name of the check run which will be created
-          path: jest-junit.xml  # Path to test results
-          reporter: java-junit  # Format of test results. Tiene que coincidir con "poetry run pytest"
+          name: Test report # Name of the check run which will be created
+          path: jest-junit.xml # Path to test results
+          reporter: java-junit # Format of test results. Tiene que coincidir con "poetry run pytest"
       - name: Coverage Check
         if: always()
-        uses: devmasx/coverage-check-action@v1.2.0  # % de mi código cubierto por tests. Medida complementaria a tests superados.
+        uses: devmasx/coverage-check-action@v1.2.0 # % de mi código cubierto por tests. Medida complementaria a tests superados.
         with:
           type: lcov
           result_path: coverage.lcov
           min_coverage: 80
           token: ${{ github.token }}
-      - name: build 
-        run: poetry build  # run ejecuta comando de consola en el repo. Comando para empaquetar con poetry.
-      - name: Publish to GH Releases  # https://github.com/marketplace?type=: publish release. BEST: https://github.com/softprops/action-gh-release. VER: https://github.com/softprops/action-gh-release#-customizing
-        if: startsWith(github.ref, 'refs/tags/v')  # para que solo se ejecute si etiquetamos el commit empezando por v
+      - name: build
+        run: poetry build # run ejecuta comando de consola en el repo. Comando para empaquetar con poetry.
+      - name: Publish to GH Releases # https://github.com/marketplace?type=: publish release. BEST: https://github.com/softprops/action-gh-release. VER: https://github.com/softprops/action-gh-release#-customizing
+        if: startsWith(github.ref, 'refs/tags/v') # para que solo se ejecute si etiquetamos el commit empezando por v
         uses: softprops/action-gh-release@v1
-        with:  # carpeta de trabajo/carpeta dist/* (todos los fichero en la carpeta)
+        with: # carpeta de trabajo/carpeta dist/* (todos los fichero en la carpeta)
           files: ${{ github.workspace }}/dist/*
