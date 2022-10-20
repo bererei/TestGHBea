@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "modeltools"
-version = "1.0.0"
+version = "3.0.1"
 description = ""
 authors = ["Beatriz"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "3.9.11"
 numpy = "^1.23.3"
 
 [tool.poetry.dev-dependencies]
@@ -20,6 +20,8 @@ pylint = "^2.15.4"
 autopep8 = "^1.7.0"
 pre-commit = "^2.20.0"
 mypy = "^0.982"
+pandas-stubs = "^1.5.0"
+scikit-learn = "^1.1.2"
 
 [build-system]
 requires = ["poetry-core"]
@@ -27,3 +29,6 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
 addopts = "--doctest-modules"
+
+[tool.mypy]
+ignore_missing_imports = true

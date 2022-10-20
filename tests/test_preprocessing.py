@@ -35,7 +35,7 @@ def test_get_numerical_features_zero_columns():
 
     df = pd.DataFrame()
 
-    assert get_numerical_features(df) == []
+    assert get_numerical_features(df) == list()
 
 
 def test_get_numerical_features_zero_rows():

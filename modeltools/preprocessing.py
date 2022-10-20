@@ -5,7 +5,7 @@ Este módulo contiene helpers (funciones auxiliares o herramientas) para el prep
 import numpy as np  # Ahora quedará declarada en .toml
 
 
-def get_numerical_features(df) -> list[str]:
+def get_numerical_features(df) -> list[int]:
     """
     Función que devuelve todas las variables cuantitativas de un dataframe.
 
